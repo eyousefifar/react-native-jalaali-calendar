@@ -1,0 +1,26 @@
+{
+  "name": "react-native-jalaali-calendar",
+  "version": "0.1.0",
+  "description": "A react native jalaali calendar library",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"echo \\\"No Tests yet\\\" && exit 1\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyousefifar/react-native-jalaali-calendar.git"
+  },
+  "keywords": [
+    "react-native",
+    "jalaali-calendar"
+  ],
+  "author": "erfan_yousefifar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eyousefifar/react-native-jalaali-calendar/issues"
+  },
+  "homepage": "https://github.com/eyousefifar/react-native-jalaali-calendar#readme",
+  "dependencies": {
+    "moment-jalaali": "^0.7.x"
+  }
+}
