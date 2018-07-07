@@ -5,7 +5,7 @@ import JYearItem from "./JYearItem";
 export default class JYear extends React.Component {
   constructor(props) {
     super(props);
-    this.jYearRange = range(props.startYear, props.endYear, 1);
+    this.jYearRange = range(props.startYear, props.endYear + 1, 1);
   }
   _keyExtractor = (item, index) => item + index;
   _renderJYear = ({ item, index }) => {
@@ -13,7 +13,7 @@ export default class JYear extends React.Component {
       <JYearItem
         setYear={this.props.setYear}
         currentYear={this.props.currentYear}
-        jyear={item}
+        jYear={item}
         index={index}
       />
     );

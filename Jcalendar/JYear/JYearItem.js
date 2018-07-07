@@ -4,7 +4,7 @@ import { persianNumber } from "../utils";
 export default props => (
   <TouchableOpacity
     onPress={() => {
-      props.setYear(props.jyear);
+      props.setYear(props.jYear);
     }}
     style={styles.container}
   >
@@ -12,11 +12,11 @@ export default props => (
       style={[
         styles.jMonthText,
         {
-          color: props.currentYear == item ? "#0ff" : "black"
+          color: props.currentYear == props.jYear ? "#0ff" : "black"
         }
       ]}
     >
-      {persianNumber(props.jyear)}
+      {persianNumber(props.jYear)}
     </Text>
   </TouchableOpacity>
 );

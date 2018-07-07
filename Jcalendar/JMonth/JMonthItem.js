@@ -10,7 +10,7 @@ export default props => (
     <Text
       style={[
         styles.jMonthText,
-        { color: props.currentMonth == index + 1 ? "#0029ff" : "black" }
+        { color: props.currentMonth == props.index + 1 ? "#0029ff" : "black" }
       ]}
     >
       {props.monthName}
