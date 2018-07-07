@@ -3,12 +3,13 @@ import { View, Text, StyleSheet } from "react-native";
 import Week from "../Week";
 export default class Month extends React.Component {
   renderWeeks = () => {
-    let { startOfMonth } = this.props;
-    let weekStart = 9 - startOfMonth;
+    let { jMonthInfromation } = this.props;
+    let weekStart = 9 - jMonthInfromation.startOfMonth;
     let weeks = [];
-    while (weekStart <= 31) {
+    while (weekStart <= jMonthInfromation.jDayInMonth) {
       weeks.push(
         <Week
+          jDayInMonth={jMonthInfromation.jDayInMonth}
           key={weekStart}
           startDay={weekStart}
           setDay={this.props.setDay}
