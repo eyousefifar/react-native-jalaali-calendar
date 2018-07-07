@@ -4,7 +4,7 @@ import Month from "./Month";
 import WeekDays from "./WeekDays";
 import JMonth from "./JMonth";
 import JYear from "./JYear";
-import { firstDayOfMonth } from "./utils";
+import { jMonthInfo } from "./utils";
 const { width, height } = Dimensions.get("window");
 export default class Jcalendar extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ export default class Jcalendar extends React.Component {
     }
   };
   render() {
-    const FDOM = firstDayOfMonth(
+    const jMonthInformation = jMonthInfo(
       this.state.selectedYear,
       this.state.selectedMonth
     );
@@ -62,7 +62,7 @@ export default class Jcalendar extends React.Component {
         </View>
         <View style={{ flex: 7 }}>
           <Month
-            startOfMonth={FDOM}
+            jMonthInformation={jMonthInformation}
             setDay={this._setDay}
             currentDay={this.state.selectedDay}
           />
