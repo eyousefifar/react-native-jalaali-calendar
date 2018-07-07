@@ -31,7 +31,7 @@ export const jMonthInfo = (year, month) => {
   return { startOfMonth: jWeekDay, jDayInMonth: jDayInMonth };
 };
 export const persianNumber = enNumber => {
-  if (enNumber != null) {
+  if (enNumber != undefined && enNumber != null) {
     let enNum = enNumber.toString();
     let persianDigits = "۰۱۲۳۴۵۶۷۸۹";
     let persianMap = persianDigits.split("");
@@ -41,6 +41,26 @@ export const persianNumber = enNumber => {
     return persian_number;
   }
   return;
+};
+export const englishNumber = persianNumber => {
+  var num_dic = {
+    "۰": "0",
+    "۱": "1",
+    "۲": "2",
+    "۳": "3",
+    "۴": "4",
+    "۵": "5",
+    "۶": "6",
+    "۷": "7",
+    "۸": "8",
+    "۹": "9"
+  };
+
+  return parseInt(
+    persianNumber.replace(/[۰-۹]/g, w => {
+      return num_dic[w];
+    })
+  );
 };
 export const jToday = () => {
   let today = new moment().format("jYYYY,jM,jD");
