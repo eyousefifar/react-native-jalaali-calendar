@@ -1,32 +1,17 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, FlatList, Text } from "react-native";
 import { jMonths } from "../utils";
+import JMonthItem from "./JMonthItem";
 export default class JMonth extends React.Component {
+  _keyExtractor = (item, index) => item + index;
   _renderJMonth = ({ item, index }) => {
     return (
-      <TouchableOpacity
-        onPress={() => {
-          this.props.setMonth(index + 1);
-        }}
-        style={{
-          width: 60,
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <Text
-          style={{
-            color: this.props.currentMonth == index + 1 ? "#0029ff" : "black",
-            fontSize: 13,
-            fontWeight: "bold",
-            textAlign: "center",
-            textAlignVertical: "center"
-          }}
-        >
-          {item}
-        </Text>
-      </TouchableOpacity>
+      <JMonthItem
+        index={index}
+        currentMonth={this.props.currentMonth}
+        setMonth={this.props.setMonth}
+        monthName={item}
+      />
     );
   };
   render() {
@@ -36,7 +21,7 @@ export default class JMonth extends React.Component {
         style={{ flex: 1 }}
         horizontal
         inverted
-        keyExtractor={(item, index) => `${item}+${index}`}
+        keyExtractor={this._keyExtractor}
         renderItem={this._renderJMonth}
       />
     );
