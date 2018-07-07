@@ -23,11 +23,12 @@ export const jMonths = [
   "بهمن",
   "اسفند"
 ];
-export const firstDayOfMonth = (year, month) => {
+export const jMonthInfo = (year, month) => {
+  let jDayInMonth = moment.jDaysInMonth(year, month);
   let jDate = new moment(`${year}/${month}/1`, "jYYYY/jM/jD");
   let weekDay = jDate.day();
   let jWeekDay = weekDay == 6 ? 1 : weekDay + 2;
-  return jWeekDay;
+  return { startOfMonth: jWeekDay, jDayInMonth: jDayInMonth };
 };
 export const persianNumber = enNumber => {
   if (enNumber != null) {
@@ -40,4 +41,8 @@ export const persianNumber = enNumber => {
     return persian_number;
   }
   return;
+};
+export const jToday = () => {
+  let today = new moment().format("jYYYY,jM,jD");
+  return { jYear: today.jYear, jMonth: today.jMonth, jDay: today.jDay };
 };
