@@ -1,37 +1,21 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, FlatList, Text } from "react-native";
 import range from "lodash/range";
-import { persianNumber } from "../utils";
+import JYearItem from "./JYearItem";
 export default class JYear extends React.Component {
   constructor(props) {
     super(props);
     this.jYearRange = range(props.startYear, props.endYear, 1);
   }
+  _keyExtractor = (item, index) => item + index;
   _renderJYear = ({ item, index }) => {
     return (
-      <TouchableOpacity
-        onPress={() => {
-          this.props.setYear(item);
-        }}
-        style={{
-          width: 60,
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <Text
-          style={{
-            color: this.props.currentYear == item ? "#0ff" : "black",
-            fontSize: 14,
-            fontWeight: "bold",
-            textAlign: "center",
-            textAlignVertical: "center"
-          }}
-        >
-          {persianNumber(item)}
-        </Text>
-      </TouchableOpacity>
+      <JYearItem
+        setYear={this.props.setYear}
+        currentYear={this.props.currentYear}
+        jyear={item}
+        index={index}
+      />
     );
   };
   render() {
@@ -41,7 +25,7 @@ export default class JYear extends React.Component {
         style={{ flex: 1 }}
         horizontal
         inverted
-        keyExtractor={(item, index) => `${item}+${index}`}
+        keyExtractor={this._keyExtractor}
         renderItem={this._renderJYear}
       />
     );
