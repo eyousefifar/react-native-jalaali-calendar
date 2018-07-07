@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, InteractionManager } from "react-native";
 import Month from "./Month";
-import Swiper from "react-native-swiper";
 import WeekDays from "./WeekDays";
 import JMonth from "./JMonth";
 import JYear from "./JYear";
@@ -18,17 +17,23 @@ export default class Jcalendar extends React.Component {
   }
   _setYear = year => {
     if (this.state.selectedYear != year) {
-      this.setState({ selectedYear: year });
+      InteractionManager.runAfterInteractions(()=>{
+        this.setState({ selectedYear: year });
+      });
     }
   };
   _setMonth = month => {
     if (this.state.selectedMonth != month) {
-      this.setState({ selectedMonth: month });
-    }
+      InteractionManager.runAfterInteractions(()=>{
+        this.setState({ selectedMonth: month });
+      }
+      });
   };
   _setDay = day => {
     if (this.state.selectedDay != day) {
-      this.setState({ selectedDay: day });
+      InteractionManager.runAfterInteractions(()=> {
+        this.setState({ selectedDay: day });
+      })
     }
   };
   render() {
