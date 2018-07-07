@@ -3,7 +3,7 @@ import { View, StyleSheet, I18nManager } from "react-native";
 import Day from "../Day";
 export default class Week extends React.Component {
   renderDays = () => {
-    let { startDay, firstWeek, indexOfFirstDay } = this.props;
+    let { startDay, firstWeek, indexOfFirstDay, jDayInMonth } = this.props;
     if (firstWeek) {
       let days = [];
       let thisDay = 1;
@@ -34,7 +34,7 @@ export default class Week extends React.Component {
       let days = [];
       let thisDay = startDay;
       for (let i = 0; i < 7; i++) {
-        if (thisDay <= 31) {
+        if (thisDay <= jDayInMonth) {
           days.push(
             <Day
               key={i + thisDay}
