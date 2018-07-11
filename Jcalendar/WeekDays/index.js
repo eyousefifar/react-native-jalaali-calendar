@@ -1,12 +1,12 @@
 import React from "react";
 import { View, StyleSheet, Text, I18nManager } from "react-native";
 import { jWeekdays } from "../utils";
-export default class WeekDays extends React.Component {
+export default class WeekDays extends React.PureComponent {
   render() {
     return (
       <View style={styles.container}>
         {jWeekdays.map((value, index) => (
-          <Text key={index} style={styles.weekDay}>
+          <Text key={`${index}`} style={styles.weekDay}>
             {value}
           </Text>
         ))}
@@ -22,11 +22,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: "#dcdcdc"
+    borderColor: "#dcdcdc",
+    marginVertical: 2
   },
   weekDay: {
     flex: 1,
-    fontSize: 12,
+    fontSize: 13,
     color: "black",
     textAlign: "center",
     textAlignVertical: "center"
