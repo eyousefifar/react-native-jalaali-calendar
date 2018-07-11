@@ -1,25 +1,28 @@
 import React from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { persianNumber } from "../utils";
-export default props => (
-  <TouchableOpacity
-    onPress={() => {
-      props.setYear(props.jYear);
-    }}
-    style={styles.container}
-  >
-    <Text
-      style={[
-        styles.jMonthText,
-        {
-          color: props.currentYear == props.jYear ? "#0ff" : "black"
-        }
-      ]}
-    >
-      {persianNumber(props.jYear)}
-    </Text>
-  </TouchableOpacity>
-);
+export default class JYearItem extends React.PureComponent {
+  _yearPress = () => {
+    this.props.setYear(this.props.jYear);
+  };
+  render() {
+    return (
+      <TouchableOpacity onPress={this._yearPress} style={styles.container}>
+        <Text
+          style={[
+            styles.jYearText,
+            {
+              color:
+                this.props.currentYear == this.props.jYear ? "#0cf" : "black"
+            }
+          ]}
+        >
+          {persianNumber(this.props.jYear)}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+}
 const styles = StyleSheet.create({
   container: {
     width: 60,
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   jYearText: {
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
     textAlignVertical: "center"
