@@ -1,17 +1,17 @@
 import React from "react";
 import { View, StyleSheet, I18nManager } from "react-native";
 import Day from "../Day";
-export default class Week extends React.Component {
+export default class Week extends React.PureComponent {
   renderDays = () => {
     let { startDay, firstWeek, indexOfFirstDay, jDayInMonth } = this.props;
+    let days = [];
     if (firstWeek) {
-      let days = [];
       let thisDay = 1;
       for (let i = 1; i <= 7; i++) {
         if (i < indexOfFirstDay) {
           days.push(
             <Day
-              key={i + thisDay}
+              key={`${i} + ${thisDay}`}
               thisDay={null}
               setDay={this.props.setDay}
               currentDay={this.props.currentDay}
@@ -20,7 +20,7 @@ export default class Week extends React.Component {
         } else {
           days.push(
             <Day
-              key={i + thisDay}
+              key={`${i} + ${thisDay}`}
               thisDay={thisDay}
               setDay={this.props.setDay}
               currentDay={this.props.currentDay}
@@ -31,13 +31,12 @@ export default class Week extends React.Component {
       }
       return days;
     } else {
-      let days = [];
       let thisDay = startDay;
       for (let i = 0; i < 7; i++) {
         if (thisDay <= jDayInMonth) {
           days.push(
             <Day
-              key={i + thisDay}
+              key={`${i} + ${thisDay}`}
               thisDay={thisDay}
               setDay={this.props.setDay}
               currentDay={this.props.currentDay}
@@ -47,7 +46,7 @@ export default class Week extends React.Component {
         } else {
           days.push(
             <Day
-              key={i + thisDay}
+              key={`${i} + ${thisDay}`}
               thisDay={null}
               setDay={this.props.setDay}
               currentDay={this.props.currentDay}
