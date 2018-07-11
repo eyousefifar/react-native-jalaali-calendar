@@ -1,28 +1,45 @@
 import React from "react";
-import { View, Text, FlatList, Dimensions, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
 import JYear from "../Jcalendar/JYear";
 import JMonth from "../Jcalendar/JMonth";
 import JDay from "./jDay";
 import JInputPicker from "./JInputPicker";
 const { width, height } = Dimensions.get("window");
-import { persianNumber } from "../Jcalendar/utils";
-export default class JPicker extends React.Component {
+import {
+  persianNumber,
+  englishNumber,
+  getJDayInMonth
+} from "../Jcalendar/utils";
+export default class JPicker extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      selectedYear: 1397,
-      selectedMonth: 12,
-      selectedDay: 13
+      selectedYear: props.selectedDate.year,
+      selectedMonth: props.selectedDate.month,
+      selectedDay: props.selectedDate.day
     };
   }
   _setYear = jYear => {
-    this.setState({ selectedYear: jYear });
+    if (this.state.selectedYear != jYear) {
+      this.setState({ selectedYear: jYear });
+    }
   };
   _setMonth = jMonth => {
-    this.setState({ selectedMonth: jMonth });
+    if (this.state.selectedMonth != jMonth) {
+      this.setState({ selectedMonth: jMonth });
+    }
   };
   _setDay = jDay => {
-    this.setState({ selectedDay: jDay });
+    if (this.state.selectedDay != jDay) {
+      this.setState({ selectedDay: jDay });
+    }
   };
   _returnDate = () => {
     this.props.getDate({
@@ -45,8 +62,8 @@ export default class JPicker extends React.Component {
         />
         <Text style={styles.text}>سال</Text>
         <JYear
-          startYear={1395}
-          endYear={1450}
+          startYear={this.props.minYear}
+          endYear={this.props.maxYear}
           currentYear={this.state.selectedYear}
           setYear={this._setYear}
         />
@@ -57,7 +74,10 @@ export default class JPicker extends React.Component {
         />
         <Text style={styles.text}>روز</Text>
         <JDay
-          jDayInMonth={31}
+          jDayInMonth={getJDayInMonth(
+            this.state.selectedYear,
+            this.state.selectedMonth
+          )}
           currentDay={this.state.selectedDay}
           setDay={this._setDay}
         />
@@ -69,11 +89,16 @@ export default class JPicker extends React.Component {
             alignItems: "center",
             marginHorizontal: 5,
             borderTopWidth: StyleSheet.hairlineWidth,
-            borderTopColor: "#d3d3d3"
+            borderTopColor: "#d3d3d3",
+            marginHorizontal: 10
           }}
         >
-          <Text>انتخاب</Text>
-          <Text>لغو</Text>
+          <TouchableOpacity onPress={this._returnDate}>
+            <Text style={styles.controlButtonText}>انتخاب</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.props.dismiss}>
+            <Text style={styles.controlButtonText}>لغو</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -81,11 +106,9 @@ export default class JPicker extends React.Component {
 }
 const styles = StyleSheet.create({
   container: {
-    width: width / 1.2,
-    height: height / 1.8,
+    flex: 1,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "#d3d3d3",
-    margin: 5
+    borderColor: "#d3d3d3"
   },
   text: {
     color: "gray",
@@ -95,5 +118,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: "#d3d3d3",
     marginHorizontal: width / 4
+  },
+  controlButtonText: {
+    color: "black",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    textAlignVertical: "center"
   }
 });
