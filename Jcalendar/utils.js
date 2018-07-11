@@ -23,8 +23,21 @@ export const jMonths = [
   "بهمن",
   "اسفند"
 ];
+export const getJDayInMonth = (year, month) => {
+  if (month <= 6) {
+    return 31;
+  } else if (month > 6 && month < 12) {
+    return 30;
+  } else if (month == 12) {
+    if (moment.jIsLeapYear(year)) {
+      return 30;
+    } else {
+      return 29;
+    }
+  }
+};
 export const jMonthInfo = (year, month) => {
-  let jDayInMonth = moment.jDaysInMonth(year, month);
+  let jDayInMonth = getJDayInMonth(year, month);
   let jDate = new moment(`${year}/${month}/1`, "jYYYY/jM/jD");
   let weekDay = jDate.day();
   let jWeekDay = weekDay == 6 ? 1 : weekDay + 2;
@@ -43,7 +56,7 @@ export const persianNumber = enNumber => {
   return;
 };
 export const englishNumber = persianNumber => {
-  var num_dic = {
+  const num_dic = {
     "۰": "0",
     "۱": "1",
     "۲": "2",
@@ -55,12 +68,10 @@ export const englishNumber = persianNumber => {
     "۸": "8",
     "۹": "9"
   };
-
-  return parseInt(
-    persianNumber.replace(/[۰-۹]/g, w => {
-      return num_dic[w];
-    })
-  );
+  let enNum = persianNumber.replace(/[۰-۹]/g, w => {
+    return num_dic[w];
+  });
+  return parseInt(enNum);
 };
 export const jToday = () => {
   let today = new moment().format("jYYYY,jM,jD");
