@@ -8,7 +8,7 @@
 
 ```jsx
 
-import { Jcalendar, JPicker } from "./react-native-jalaali-calendar";
+import { Jcalendar, JPicker } from "react-native-jalaali-calendar";
 export default class App extends Component {
   render() {
     return (
