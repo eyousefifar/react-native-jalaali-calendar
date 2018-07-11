@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TextInput, I18nManager } from "react-native";
 import { persianNumber, englishNumber } from "../Jcalendar/utils";
-export default class JInputPicker extends React.Component {
+export default class JInputPicker extends React.PureComponent {
   _setYear = text => {
     let num = englishNumber(text);
     this.props.setYear(num);
