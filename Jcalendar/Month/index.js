@@ -1,16 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Week from "../Week";
-export default class Month extends React.Component {
+export default class Month extends React.PureComponent {
   renderWeeks = () => {
-    let { jMonthInfromation } = this.props;
-    let weekStart = 9 - jMonthInfromation.startOfMonth;
+    let { jMonthInfo } = this.props;
+    let weekStart = 9 - jMonthInfo.startOfMonth;
     let weeks = [];
-    while (weekStart <= jMonthInfromation.jDayInMonth) {
+    while (weekStart <= jMonthInfo.jDayInMonth) {
       weeks.push(
         <Week
-          jDayInMonth={jMonthInfromation.jDayInMonth}
-          key={weekStart}
+          jDayInMonth={jMonthInfo.jDayInMonth}
+          key={`${weekStart}`}
           startDay={weekStart}
           setDay={this.props.setDay}
           currentDay={this.props.currentDay}
@@ -20,21 +20,15 @@ export default class Month extends React.Component {
     }
     return weeks;
   };
-  firstWeek = () => {
-    let { startOfMonth } = this.props;
-    return (
-      <Week
-        firstWeek
-        indexOfFirstDay={startOfMonth}
-        setDay={this.props.setDay}
-        currentDay={this.props.currentDay}
-      />
-    );
-  };
   render() {
     return (
       <View style={styles.container}>
-        {this.firstWeek()}
+        <Week
+          firstWeek
+          indexOfFirstDay={this.props.jMonthInfo.startOfMonth}
+          setDay={this.props.setDay}
+          currentDay={this.props.currentDay}
+        />
         {this.renderWeeks()}
       </View>
     );
