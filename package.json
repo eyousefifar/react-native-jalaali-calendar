@@ -1,6 +1,6 @@
 {
   "name": "react-native-jalaali-calendar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A react native jalaali calendar library",
   "main": "index.js",
   "scripts": {
